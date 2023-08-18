@@ -24,10 +24,9 @@ def encode_kv(timestamp: int, key: str, value: str) -> tuple[int, bytes]:
 
 
 def decode_kv(data: bytes) -> tuple[int, str, str]:
-    timestamp, key_size, _ = struct.unpack(
-        HEADER_FORMAT, data[:HEADER_SIZE])
-    key_bytes: bytes = data[HEADER_SIZE: HEADER_SIZE + key_size]
-    value_bytes: bytes = data[HEADER_SIZE + key_size:]
+    timestamp, key_size, _ = struct.unpack(HEADER_FORMAT, data[:HEADER_SIZE])
+    key_bytes: bytes = data[HEADER_SIZE : HEADER_SIZE + key_size]
+    value_bytes: bytes = data[HEADER_SIZE + key_size :]
     key: str = key_bytes.decode("utf-8")
     value: str = value_bytes.decode("utf-8")
     return (timestamp, key, value)
